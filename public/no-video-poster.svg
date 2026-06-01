@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="593" height="333" viewBox="0 0 593 333" fill="none" role="img" aria-label="Video unavailable">
+  <rect width="593" height="333" fill="#18181b"/>
+  <circle cx="296" cy="166" r="44" fill="#3f3f46"/>
+  <path d="M284 142l40 24-40 24v-48z" fill="#fafafa"/>
+  <text x="296" y="260" text-anchor="middle" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="14">Video preview unavailable</text>
+</svg>

@@ -1,65 +1,129 @@
-import Image from "next/image";
+import EventCard from '@/components/EventCard';
+import FeaturedCarousel from '@/components/FeaturedCarousel';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import HeroSection from '@/components/HeroSection';
+import StatsSection from '@/components/StatsSection';
+import {
+  fetchPosts,
+  getFeaturedPosts,
+  getPageStats,
+  type Post,
+} from '@/lib/data';
+import { Calendar, Sparkles, Users } from 'lucide-react';
+import Link from 'next/link';
 
-export default function Home() {
+function getRecentPosts(posts: Post[], featured: Post[], limit = 9): Post[] {
+  const featuredIds = new Set(featured.map((p) => p.id));
+  return posts
+    .filter((p) => !featuredIds.has(p.id))
+    .sort(
+      (a, b) =>
+        new Date(b.created_time).getTime() - new Date(a.created_time).getTime(),
+    )
+    .slice(0, limit);
+}
+
+async function HomeContent() {
+  const posts = await fetchPosts();
+  const featured = getFeaturedPosts(posts, 8);
+  const recent = getRecentPosts(posts, featured);
+  const stats = getPageStats(posts);
+
+  const statCards = [
+    {
+      value: stats.totalEvents.toLocaleString('en-IN'),
+      label: 'Events listed',
+      icon: <Calendar className='size-7' aria-hidden />,
+    },
+    {
+      value: stats.upcomingEvents.toLocaleString('en-IN'),
+      label: 'Posted this week',
+      icon: <Sparkles className='size-7' aria-hidden />,
+    },
+    {
+      value: `${stats.totalOrganizers}+`,
+      label: 'Sources',
+      icon: <Users className='size-7' aria-hidden />,
+    },
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <HeroSection />
+
+      <StatsSection stats={statCards} />
+
+      {featured.length > 0 && <FeaturedCarousel posts={featured} />}
+
+      <section
+        className='section-spacing'
+        aria-labelledby='recent-events-heading'>
+        <div className='container-max'>
+          <div className='mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between'>
+            <div>
+              <h2
+                id='recent-events-heading'
+                className='text-2xl font-semibold tracking-tight md:text-3xl'>
+                Recent events
+              </h2>
+              <p className='mt-2 max-w-xl text-muted-foreground'>
+                Fresh listings from organizers across the platform.
+              </p>
+            </div>
+            <Link href='/events' className='btn-secondary shrink-0'>
+              View all events
+            </Link>
+          </div>
+
+          {recent.length > 0 ? (
+            <ul className='stagger-grid grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
+              {recent.map((post) => (
+                <li key={crypto.randomUUID()}>
+                  <EventCard post={post} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className='text-center text-muted-foreground'>
+              No additional events right now.{' '}
+              <Link
+                href='/events'
+                className='text-primary font-medium hover:underline'>
+                Browse the full directory
+              </Link>
+              .
+            </p>
+          )}
+        </div>
+      </section>
+
+      <section className='border-t border-border bg-muted/40 py-14 md:py-16'>
+        <div className='container-max text-center'>
+          <h2 className='text-2xl font-semibold tracking-tight md:text-3xl'>
+            Want to feature your event?
+          </h2>
+          <p className='mx-auto mt-3 max-w-lg text-muted-foreground'>
+            Reach people actively browsing for things to do. Submit your event
+            and we&apos;ll help you get in front of the right audience.
           </p>
+          <Link href='/contact' className='btn-primary mt-8 inline-flex'>
+            Add your event
+          </Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </section>
+    </>
+  );
+}
+
+export default async function HomePage() {
+  return (
+    <>
+      <Header />
+      <main id='main-content'>
+        <HomeContent />
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }
