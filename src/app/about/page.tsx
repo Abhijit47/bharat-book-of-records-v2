@@ -239,7 +239,7 @@ export default async function AboutPage() {
     <>
       <Header />
       <main id='main-content'>
-        <AboutContent />
+        {/* <AboutContent /> */}
       </main>
       <Footer />
     </>
