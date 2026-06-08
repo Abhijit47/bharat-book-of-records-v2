@@ -45,7 +45,7 @@ function RemoteImage({
         src={src}
         alt={alt}
         fill
-        // unoptimized={isLocal}
+        unoptimized={true}
         sizes={sizes ?? '100vw'}
         priority={priority}
         className={cn('object-cover', className)}
@@ -59,7 +59,7 @@ function RemoteImage({
       alt={alt}
       width={width}
       height={height}
-      // unoptimized={isLocal}
+      unoptimized={true}
       sizes={sizes}
       priority={priority}
       className={cn('h-full w-full rounded-lg object-cover', className)}
