@@ -14,6 +14,18 @@ importers:
       '@better-fetch/fetch':
         specifier: ^1.1.21
         version: 1.1.21
+      '@hyper-fetch/core':
+        specifier: ^8.2.0
+        version: 8.2.0
+      '@hyper-fetch/plugin-devtools':
+        specifier: ^8.2.0
+        version: 8.2.0(@hyper-fetch/core@8.2.0)(@hyper-fetch/sockets@8.2.0(@hyper-fetch/core@8.2.0))
+      '@hyper-fetch/react':
+        specifier: ^8.2.0
+        version: 8.2.0(@hyper-fetch/core@8.2.0)(@hyper-fetch/sockets@8.2.0(@hyper-fetch/core@8.2.0))(react@19.2.4)
+      '@hyper-fetch/sockets':
+        specifier: ^8.2.0
+        version: 8.2.0(@hyper-fetch/core@8.2.0)
       '@tabler/icons-react':
         specifier: ^3.44.0
         version: 3.44.0(react@19.2.4)
@@ -275,6 +287,18 @@ packages:
   '@better-fetch/fetch@1.1.21':
     resolution: {integrity: sha512-/ImESw0sskqlVR94jB+5+Pxjf+xBwDZF/N5+y2/q4EqD7IARUTSpPfIo8uf39SYpCxyOCtbyYpUrZ3F/k0zT4A==}
 
+  '@better-hooks/lifecycle@2.0.0':
+    resolution: {integrity: sha512-VACrnIj/rrHwIiwIMqt7zijtpluhqIOeU3ivZgn2QC9OXGIKvi4vOhPo159NxmJVw+RonwOfNc25EXHAvAJvoA==}
+    engines: {node: '>=8', npm: '>=5'}
+    peerDependencies:
+      react: '>= 16.8.0'
+
+  '@better-hooks/performance@2.1.0':
+    resolution: {integrity: sha512-e/uzRNUq3Sm8Amph+/Zz9yRoLcoYtDfp4JpwzxtGOZAXEj7i9hqGjLHR94/Nv587FNgzGVtysFgkNCHImDJjkQ==}
+    engines: {node: '>=8', npm: '>=5'}
+    peerDependencies:
+      react: '>= 16.8.0'
+
   '@date-fns/tz@1.5.0':
     resolution: {integrity: sha512-lwYN/vDPeNRULcepoE/LO2Pgx+7/RV+S9ARfbc9lr2DtGkOD7pAiruHvbR1RX3Qyf6ja47EWJDMsNK5vK08DJg==}
 
@@ -375,6 +399,35 @@ packages:
   '@humanwhocodes/retry@0.4.3':
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
+
+  '@hyper-fetch/core@8.2.0':
+    resolution: {integrity: sha512-9HL3GpHXGZ0i/w2Gx2EeWiGmYGv6JaP95l+vlFx69rIAU0q8KKKnnYndZVTdnmXTibk+mlZHrcNe+JaA2gDEEw==}
+
+  '@hyper-fetch/plugin-devtools@8.2.0':
+    resolution: {integrity: sha512-DXwWqM6nbbnpQZHrjovFSJVfmpJSERryXmNNX+HIq9mNLR5CWJvJc8Ko5eyX8r7Cv96z4adT/qyKl0Yy8YTu0A==}
+    peerDependencies:
+      '@hyper-fetch/core': '*'
+      '@hyper-fetch/sockets': '*'
+    peerDependenciesMeta:
+      '@hyper-fetch/core':
+        optional: true
+      '@hyper-fetch/sockets':
+        optional: true
+
+  '@hyper-fetch/react@8.2.0':
+    resolution: {integrity: sha512-I3yYNxxVw5pFNXgy0LKRj3sQlnEjbFYQ5WN2LESJ8QkPSVdZTgFQ0mgh/1JZ5R1oiPpR+s2Cv4osR3lPd5QSiw==}
+    peerDependencies:
+      '@hyper-fetch/core': '*'
+      '@hyper-fetch/sockets': '*'
+      react: '>= 18.0.0'
+    peerDependenciesMeta:
+      '@hyper-fetch/sockets':
+        optional: true
+
+  '@hyper-fetch/sockets@8.2.0':
+    resolution: {integrity: sha512-XYRt07dfypZ9uyQHB4dRPVrQ2PBIjZtC5i8Pt51uDN8xMq63OjSlsyPQ8NgbVk1NqD1YcmO/X+dqzXuzX979wA==}
+    peerDependencies:
+      '@hyper-fetch/core': '*'
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -1896,6 +1949,10 @@ packages:
 
   eventemitter3@5.0.4:
     resolution: {integrity: sha512-mlsTRyGaPBjPedk6Bvw+aqbsXDtoAyAzm5MO7JgU+yVRyMQ5O8bD4Kcci7BS85f93veegeCPkL8R4GLClnjLFw==}
+
+  events@3.3.0:
+    resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
+    engines: {node: '>=0.8.x'}
 
   eventsource-parser@3.1.0:
     resolution: {integrity: sha512-kJezFj9YFAMLeORyi7aCLxLbD5/qWMQnoMVlVPyHIll7lgRJCc3JVln9Vgl9nwQi0YkMnhdGTMNn7CkRRAptMg==}
@@ -3735,6 +3792,15 @@ snapshots:
 
   '@better-fetch/fetch@1.1.21': {}
 
+  '@better-hooks/lifecycle@2.0.0(react@19.2.4)':
+    dependencies:
+      react: 19.2.4
+
+  '@better-hooks/performance@2.1.0(react@19.2.4)':
+    dependencies:
+      '@better-hooks/lifecycle': 2.0.0(react@19.2.4)
+      react: 19.2.4
+
   '@date-fns/tz@1.5.0': {}
 
   '@dotenvx/dotenvx@1.70.0':
@@ -3853,6 +3919,29 @@ snapshots:
   '@humanwhocodes/module-importer@1.0.1': {}
 
   '@humanwhocodes/retry@0.4.3': {}
+
+  '@hyper-fetch/core@8.2.0':
+    dependencies:
+      events: 3.3.0
+
+  '@hyper-fetch/plugin-devtools@8.2.0(@hyper-fetch/core@8.2.0)(@hyper-fetch/sockets@8.2.0(@hyper-fetch/core@8.2.0))':
+    optionalDependencies:
+      '@hyper-fetch/core': 8.2.0
+      '@hyper-fetch/sockets': 8.2.0(@hyper-fetch/core@8.2.0)
+
+  '@hyper-fetch/react@8.2.0(@hyper-fetch/core@8.2.0)(@hyper-fetch/sockets@8.2.0(@hyper-fetch/core@8.2.0))(react@19.2.4)':
+    dependencies:
+      '@better-hooks/lifecycle': 2.0.0(react@19.2.4)
+      '@better-hooks/performance': 2.1.0(react@19.2.4)
+      '@hyper-fetch/core': 8.2.0
+      react: 19.2.4
+    optionalDependencies:
+      '@hyper-fetch/sockets': 8.2.0(@hyper-fetch/core@8.2.0)
+
+  '@hyper-fetch/sockets@8.2.0(@hyper-fetch/core@8.2.0)':
+    dependencies:
+      '@hyper-fetch/core': 8.2.0
+      events: 3.3.0
 
   '@img/colour@1.1.0':
     optional: true
@@ -5365,6 +5454,8 @@ snapshots:
   etag@1.8.1: {}
 
   eventemitter3@5.0.4: {}
+
+  events@3.3.0: {}
 
   eventsource-parser@3.1.0: {}
 
