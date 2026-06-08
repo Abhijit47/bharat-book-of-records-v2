@@ -6,11 +6,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**.fbcdn.net',
-      },
-      {
-        protocol: 'https',
-        hostname: 'bharat-book-of-records-v2-cpnt.vercel.app',
+        hostname: '*',
+        port: '',
+        pathname: '/**',
       },
     ],
   },
