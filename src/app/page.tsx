@@ -121,7 +121,7 @@ export default async function HomePage() {
     <>
       <Header />
       <main id='main-content'>
-        {/* <HomeContent /> */}
+        <HomeContent />
       </main>
       <Footer />
     </>
